@@ -1,14 +1,4 @@
-#' Read an excel file and keep blank cells
-#'
-#' @param xlsxFile path to an xlsx binary file
-#' @param sheet sheet name or number, defaults to first sheet
-#' @return dataframe
-#' @export
-import_excel <- function(file, sheet = 1){
-  df <- openxlsx::read.xlsx(xlsxFile = file, sheet = sheet)
-  df[is.na(df)] <- ""
-  return(df)
-}
+
 #' Attempts to automatically recognize file type and import
 #'  as dataframe
 #'

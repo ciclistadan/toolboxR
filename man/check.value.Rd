@@ -31,7 +31,7 @@ These functions are typically used in conjunction with lapply to
 determine if they are present in a df.
 }
 \details{
-Important: since botht the child function accepts multiple arguments (...) when
+Important: since both the child function accepts multiple arguments (...) when
            it is built with multiple ids, you must explicitly refer to additional
            variables my name (dat, field, value). Without them the function
            returns NA even with valid queries.

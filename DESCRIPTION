@@ -1,8 +1,7 @@
 Package: toolboxR
 Type: Package
 Title: Collection of functions and scripts for bioinformatics.
-Description: Just a bunch of random tools for dataset annotation,
-    curation, and cleaning.
+Description: Random tools for dataset annotation, curation, and cleaning.
 Version: 0.1.0
 Author: Dan Rozelle
 Maintainer: Dan Rozelle <dan.rozelle@gmail.com>
@@ -11,5 +10,6 @@ LazyData: TRUE
 Depends:
     R (>= 3.3.0)
 Suggests:
-    XML (>= 3.98)
+    XML (>= 3.98),
+    readxl (>= 0.1.1)
 RoxygenNote: 5.0.1
