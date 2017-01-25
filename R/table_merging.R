@@ -1,10 +1,35 @@
-
-clean_values <- function(x, delim = "; "){
-  # first we need to split any collapsed strings using the delimited
-  # get rid of NA fields
-  x <- x[!is.na(x)]
-  x <- lapply(x, strsplit, split = delim)
-  x <- unlist(x)
+#' Collapse a complex array into unique components
+#'
+#' Given a vector or list, break into atomic units, remove
+#'  any redundancies and return a vector of unique elements
+#'
+#' @param x Vector or list. This can contain all valid element types, however
+#'         the current version always returns a character type. 
+#' @param delim A non-null character use to both split complex character 
+#'              strings, and delimit output string elements containing more than 
+#'              one element.
+#' @param unique Logical If TRUE, warns when more than one element is returned 
+#'               from x after simplification.
+#' @param na.rm Logical if TRUE individual NA elements will be removed before
+#'              simplification.
+#' @param ignore.case Logical should character string comparisons ignore case. 
+#'                    A FALSE argument could return "FOO; Foo; foo" while a TRUE
+#'                    argument would only return "FOO". 
+#' @param sort Logical should the final values be sorted before return.                                 
+#' @param null.return Value to be returned if na.rm = TRUE and non-NA values 
+#'             do not exist. By default NA will be returned for null return even
+#'             if na.rm = TRUE, set this value to change this behavior.
+#' @return delimiter separated character string.
+#' @export
+Simplify <- function(x, delim = "; ", unique = F, na.rm = T, ignore.case = T, sort = T, null.return = NA){
+  
+  # clean up character elements
+  x <- unlist(lapply(x, function(y){
+        if(is.character(y)){
+          # split complex strings
+          y <- strsplit(y, split = delim)
+        }else{y}
+        }))
 
   # chomp each value
   x <- gsub("^\\s+", "", x)
@@ -16,7 +41,22 @@ clean_values <- function(x, delim = "; "){
   }else{
     x <- unique(toupper(x))
   }
-  x[order(x)]
+
+  # get rid of NA fields
+  if(na.rm == TRUE){x <- x[!is.na(x)]}
+  # fix null returns
+  if( identical(x, character(0)) ){x <- null.return}
+  # sort if desired
+  if(sort){x <- x[order(x)]}
+  
+  # collapse to final string
+  out <- paste(x, collapse = delim)
+  
+  # warn on non-unique return
+  if(unique & (length(x) > 1) ){
+    warning(paste0("Elements (",out,") did not collapse to unique as required"))
+  }
+  out
 }
 
 #' Append DF using specified overwrite modes
@@ -83,8 +123,8 @@ append_df <- function(main, new, id = "Patient",
       had_value      <- !is.na(original_values) & original_values != ""
       has_new_value  <- any(!is.na(new_values)) & any(new_values != "")
 
-      original_values <- clean_values(original_values)
-      new_values <- clean_values(new_values)
+      original_values <- Simplify(original_values)
+      new_values <- Simplify(new_values)
 
       # Cases:
       # if didn't have a value,      return the new value, this works with blank new values too
@@ -99,7 +139,7 @@ append_df <- function(main, new, id = "Patient",
       }else if(has_new_value & all(new_values == original_values)){
         out <- new_values
       }else if(mode == "append"){
-        out <- clean_values(c(new_values,original_values))
+        out <- Simplify(c(new_values,original_values))
       }else if(mode == "replace"){
         out <- new_values
       }else if(mode == "safe"){
