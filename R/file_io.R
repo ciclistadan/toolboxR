@@ -10,6 +10,7 @@
 #'                    valid variable names. If necessary they are adjusted 
 #'                    (by make.names) so that they are, and also to ensure 
 #'                    that there are no duplicates.
+#' @param skip number of lines to skip before import
 #' @return dataframe
 #' @export
 AutoRead <- function(file, sheet = 1, check.names = T, skip = 0, colnames = T){
