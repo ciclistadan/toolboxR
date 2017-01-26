@@ -179,3 +179,31 @@ append_df <- function(main, new, id = "Patient",
 
   return(main)
 }
+
+#' Collapse redundant rows of a df using the Simplify function 
+#'
+#' This function performs similar to aggregate.data.frame, but with several
+#' conveniences. For simplicity it currently only allows grouping
+#' by columns that exist in df by explicit column name. Collapse columns are
+#' moved to the front of the df.
+#'
+#' @param df DataFrame containing column.names
+#' @param column.names character vector of column names used for grouping rows. 
+#'                     Performs a similar function as "by=" in aggreagte() 
+#' @param unique Logical Should fields containing more then one unique value be 
+#'                     allowed. It still returns a delimited list of multiple 
+#'                     values but throws warning from Simplify() if enforced.
+#' @return collapsed df
+#' @export
+CollapseDF <- function(df, column.names, unique = F){
+
+  columns <- lapply(column.names, function(x){df[[x]]})
+  df <- aggregate.data.frame(df, by = columns, Simplify, unique = unique)
+  
+  # Remove aggregate grouping columns
+  df <- df[,!grepl("Group\\.[0-9]+$", names(df))]
+  
+  # Move the id columns to the front
+  df <- toolboxR::move_columns(column.names, df)
+  df
+}
