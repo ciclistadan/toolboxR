@@ -10,13 +10,18 @@
 #'                    valid variable names. If necessary they are adjusted 
 #'                    (by make.names) so that they are, and also to ensure 
 #'                    that there are no duplicates.
-#' @param skip number of lines to skip before import
+#' @param skip number of lines to skip before import.
 #' @return dataframe
 #' @export
 AutoRead <- function(file, sheet = 1, check.names = T, skip = 0, colnames = T){
   tryCatch({
     if(endsWith(file,"xlsx") | endsWith(file, "xls")){
-      df <- readxl::read_excel(path = file, sheet = sheet, skip = skip, col_names = colnames)
+      t <- readxl:::xlsx_col_types(file)
+      df <- readxl::read_excel(path = file, 
+                               sheet = sheet, 
+                               skip = skip, 
+                               col_names = colnames,
+                               col_types = t )
       if(check.names){
         df <- df[,!is.na(names(df))]
         names(df) <- make.names(names(df), unique = TRUE)
