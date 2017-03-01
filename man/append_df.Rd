@@ -12,7 +12,9 @@ append_df(main, new, id = "Patient", mode = "safe", verbose = TRUE,
 
 \item{id}{column name used to designate matching rows.}
 
-\item{mode}{append : append any new values to preexisting values using delimiter}
+\item{mode}{"append" any new values to preexisting values using delimiter,
+"replace" any preexisting values with new value, or "safe" (DEFAULT)
+to only write new value if no preexisting valuethe search column name.}
 
 \item{verbose}{not yet implemented}
 

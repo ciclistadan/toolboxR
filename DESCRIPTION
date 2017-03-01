@@ -2,7 +2,7 @@ Package: toolboxR
 Type: Package
 Title: Collection of functions and scripts for bioinformatics.
 Description: Random tools for dataset annotation, curation, and cleaning.
-Version: 0.1.0
+Version: 0.1.1
 Author: Dan Rozelle
 Maintainer: Dan Rozelle <dan.rozelle@gmail.com>
 License: GPL-2
