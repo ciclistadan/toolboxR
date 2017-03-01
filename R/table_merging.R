@@ -238,7 +238,7 @@ CollapseDF <- function(df, column.names, unique = F){
 #' @param df DataFrame containing column.names
 #' @param column.names character vector of column names used for grouping rows. 
 #'                     Performs a similar function as "by=" in aggregate() 
-#' @return collapsed data.table
+#' @return collapsed data.table. This can be used as a data.frame or returned as dt
 #' @examples 
 #' df <- data.frame(
 #'   Patient = c(1,   1,  2,  2,  3,  4),
