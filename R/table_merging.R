@@ -211,7 +211,7 @@ append_df <- function(main, new, id = "Patient",
 #'  # 4       4    NA       4
 #' @export
 CollapseDF <- function(df, column.names, unique = F){
-  
+  warning("Deprecated function, please use toolboxR::collapse_dt")
   # get a list of columns used for selecting
   columns <- lapply(column.names, function(x){df[[x]]})
   
@@ -226,3 +226,54 @@ CollapseDF <- function(df, column.names, unique = F){
   df
 }
 
+#' Collapse redundant rows of a df using the Simplify function 
+#'
+#' This function performs similar to aggregate.data.frame, but with several
+#' conveniences. This version also improves on the previous CollapseDF by 
+#' temporarily coercing into a data.table structure, making it handle Big Data
+#' much better. For simplicity it currently only allows grouping
+#' by columns that exist in df by explicit column name. Collapse columns are
+#' moved to the front of the df.
+#'
+#' @param df DataFrame containing column.names
+#' @param column.names character vector of column names used for grouping rows. 
+#'                     Performs a similar function as "by=" in aggregate() 
+#' @return collapsed data.table
+#' @examples 
+#' df <- data.frame(
+#'   Patient = c(1,   1,  2,  2,  3,  4),
+#'   Age     = c(31, 31, 32, NA, 33, NA),
+#'   Score   = c( 9, 10,  8,  8, "",  4))
+#' collapse_dt(df, "Patient")
+#'  #   Patient   Age   Score
+#'  # 1       1    31   10; 9
+#'  # 2       2    32       8
+#'  # 3       3    33      
+#'  # 4       4    NA       4
+#' @export
+collapse_dt <- function(df, column.names, unique = F){
+  
+  dt   <- data.table::as.data.table(df)
+
+  # suppress the coersion warning since it is expected
+  # <simpleWarning in melt.data.table(dt, id.vars = "Sample_Name", na.rm = TRUE):
+  # 'measure.vars' [File_Name, Patient, Study, Study_Phase, ...] are not all of
+  # the same type. By order of hierarchy, the molten data value column will be of
+  # type 'character'. All measure variables not of type 'character' will be coerced
+  # to. Check DETAILS in ?melt.data.table for more on coercion.>
+  suppressWarnings(long <- data.table::melt(dt, id.vars = column.names, na.rm = TRUE)
+  )
+  # filter to remove all NA, blank, or non-duplicated rows
+  # remove sample-variable sets that are already unique
+  already.unique <- long[(value != "NA"), `:=`(n=.N), by = c(column.names, "variable")][n==1, 1:3]
+  duplicated     <- long[(value != "NA"), `:=`(n=.N), by = c(column.names, "variable")][n>1, 1:3]
+
+  # summarize remaining fields to simplify
+  dedup          <- duplicated[, .(value = toolboxR::Simplify(value)), by = c(column.names, "variable")]
+
+  # join and spread
+  long <- rbind(already.unique, dedup)
+  wide <- data.table::dcast(long, get(column.names) ~ variable, value.var = "value")
+  wide
+
+}
