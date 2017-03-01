@@ -184,7 +184,7 @@ append_df <- function(main, new, id = "Patient",
   return(main)
 }
 
-#' Collapse redundant rows of a df using the Simplify function 
+#' DEPRECATED: Collapse redundant rows of a df using the Simplify function 
 #'
 #' This function performs similar to aggregate.data.frame, but with several
 #' conveniences. For simplicity it currently only allows grouping
