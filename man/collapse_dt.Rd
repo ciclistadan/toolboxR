@@ -13,7 +13,7 @@ collapse_dt(df, column.names, unique = F)
 Performs a similar function as "by=" in aggregate()}
 }
 \value{
-collapsed data.table
+collapsed data.table. This can be used as a data.frame or returned as dt
 }
 \description{
 This function performs similar to aggregate.data.frame, but with several
