@@ -268,6 +268,8 @@ collapse_dt <- function(df, column.names, unique = F){
   already.unique <- long[(value != "NA"), n := .N, by = c(column.names, "variable")][n==1, 1:3]
   duplicated     <- long[(value != "NA"), n := .N, by = c(column.names, "variable")][n>1, 1:3]
 
+  # TODO: save columns that have all NA
+  
   # summarize remaining fields to simplify
   dedup          <- duplicated[, .(value = toolboxR::Simplify(value)), by = c(column.names, "variable")]
 
@@ -275,6 +277,6 @@ collapse_dt <- function(df, column.names, unique = F){
   long <- rbind(already.unique, dedup)
   wide <- data.table::dcast(long, get(column.names) ~ variable, value.var = "value" )
   wide <- dplyr::rename_(wide, .dots=setNames("column.names", column.names))
-  wide
+  as.data.frame(wide)
 
 }

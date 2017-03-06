@@ -19,4 +19,3 @@ A df with changed column names
 \description{
 Renames specified columns in data.frame
 }
-

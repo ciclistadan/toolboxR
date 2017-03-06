@@ -21,4 +21,3 @@ term matched more than one geneset, it will be reflected in the "geneset" values
 \examples{
 gpsdb_table("npc1")
 }
-

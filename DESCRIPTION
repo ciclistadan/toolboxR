@@ -13,4 +13,4 @@ Suggests:
     XML (>= 3.98),
     readxl (>= 0.1.1),
     data.table(>= 1.10.0)
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

@@ -44,4 +44,3 @@ l <- data.frame( a = c("one", "two"),
           c(1,1,1))
  merge_redundant_lists(l, output_delim = ", ")
 }
-

@@ -24,4 +24,3 @@ A helper function to build S3 path-specific tools. Since you will commonly write
 to a single path in an S3 bucket repeatedly, this simplifys the process by
 pre-populating longer arguments such as bucket and path strings.
 }
-

@@ -37,4 +37,3 @@ CollapseDF(df, "Patient")
  # 3       3    33      
  # 4       4    NA       4
 }
-

@@ -26,4 +26,3 @@ A helper function to build df-specific search tools.
 These functions are typically used in conjunction with lapply to
 determine if they are present in a df.
 }
-

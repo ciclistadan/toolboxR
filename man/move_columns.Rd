@@ -21,4 +21,3 @@ A df with rearranged columns
 \description{
 Sort specified columns to front of a data.frame
 }
-

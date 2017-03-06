@@ -46,4 +46,3 @@ determine if they are present in a df.
    unlist(lapply(p, lookup_by_id_and_visit, dat = df, field = "Test.Result"))
    # "negative" "negative"
 }
-

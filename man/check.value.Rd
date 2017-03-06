@@ -56,4 +56,3 @@ Important: since both the child function accepts multiple arguments (...) when
   check_by_id_and_visit("p3", NA, dat = df, field = "Test.Result", value = "pos")
   # NA
 }
-

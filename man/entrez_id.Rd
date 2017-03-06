@@ -27,4 +27,3 @@ returns a sorted unique list of values.
  entrez_id("hsa-let-7a-1")
  entrez_id(c("hsa-let-7a-1", "tp53"))
 }
-

@@ -17,4 +17,3 @@ df with renamed columns
 \description{
 Format columns names to lower, UPPER or Title.Case
 }
-

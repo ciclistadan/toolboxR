@@ -38,4 +38,3 @@ delimiter separated character string.
 Given a vector or list, break into atomic units, remove
  any redundancies and return a vector of unique elements
 }
-

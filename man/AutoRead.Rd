@@ -28,4 +28,3 @@ dataframe
 Attempts to automatically recognize file type and import
  as dataframe
 }
-

@@ -28,4 +28,3 @@ Given a main df, either replace, append, or warn of conflict for values
  found in matching column and row of new df. Row is matched by a paired id
  value.
 }
-
