@@ -28,15 +28,18 @@ AutoRead <- function(file, sheet = 1, check.names = T, skip = 0, colnames = T){
         }
       df
     }else if (endsWith(file, "txt")){
-      df <- read.delim(file = file, stringsAsFactors = F, header = colnames)
+      df <- read.delim(file = file, 
+                       stringsAsFactors = F, 
+                       header = colnames, 
+                       check.names = check.names)
       if(skip > 0){
         names(df) <- df[skip+1,]
         df <- df[(skip+1):nrow(df),]
       }
-      if(check.names){
-        df <- df[,!is.na(names(df))]
-        names(df) <- make.names(names(df), unique = TRUE)
-      }
+      # if(check.names){
+      #   df <- df[,!is.na(names(df))]
+      #   names(df) <- make.names(names(df), unique = TRUE)
+      # }
 
       df
       
