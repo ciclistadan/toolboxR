@@ -21,13 +21,13 @@
 #'             if na.rm = TRUE, set this value to change this behavior.
 #' @return delimiter separated character string.
 #' @export
-Simplify <- function(x, delim = "; ", unique = F, na.rm = T, ignore.case = T, sort = T, null.return = NA){
+Simplify <- function(x, delim = "; ", unique = F, na.rm = T, ignore.case = T, sort = T, missing.value = "NA", null.return = NA){
   
   # clean up character elements
   x <- unlist(lapply(x, function(y){
     if(is.character(y)){
       # split complex strings
-      y <- strsplit(y, split = delim)
+      y <- strsplit(y, split = delim, fixed = T)
     }else{y}
   }))
   
@@ -39,29 +39,37 @@ Simplify <- function(x, delim = "; ", unique = F, na.rm = T, ignore.case = T, so
   if( length(unique(toupper(x))) == length(unique(x)) ){
     x <- unique(x)
   }else{
-    x <- unique(toupper(x))
-  }
+    x <- unique(toupper(x))  }
+  
+  #remove missing placeholder values
+  x <- x[x != missing.value] 
   
   # get rid of NA fields
   if(na.rm == TRUE){
     # remove both actual NAs and character "NA"s
     x <- x[!is.na(x)]
     x <- x[x != "NA"]
-    }
-  # fix null returns
-  if( identical(x, character(0)) ){x <- null.return}
+  }
+  
+  
   # sort if desired
   if(sort){x <- x[order(x)]}
   
   # collapse to final string
   out <- paste(x, collapse = delim)
   
+  # fix null returns
+  if( identical(out, character(0)) ){x <- null.return}
+  
   # warn on non-unique return
   if(unique & (length(x) > 1) ){
     warning(paste0("Elements (",out,") did not collapse to unique as required"))
   }
+
+  out[out %in% c("NA", NA, "")] <- null.return
   out
 }
+
 
 #' Append DF using specified overwrite modes
 #'
