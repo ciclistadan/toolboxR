@@ -3,6 +3,7 @@
 export(AutoRead)
 export(CollapseDF)
 export(GetS3Table)
+export(PutS3Table)
 export(Simplify)
 export(WriteTableToS3)
 export(append_df)
