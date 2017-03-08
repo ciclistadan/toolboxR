@@ -62,12 +62,15 @@ GetS3Table <- function(s3.path, cache = F, ...){
   df
 }
 
-#currently only works for tab-delim tables
-PutS3Table <- function(object, s3.path, cache = F){
+#' Write tab-delim tables to S3 bucket 
+#'
+#' @param object a table object (df, data.table, tibble
+#' @param s3.path Full character string uri of the table. 
+#' @return aws response code
+#' @export
+PutS3Table <- function(object, s3.path, sep = "\t", row.names = F, quote = F, ...){
   name  <- basename(s3.path)
   local <- file.path("/tmp", name)
-  write.table(object, local, row.names = F, quote = F, sep = "\t")
-  
+  write.table(object, local, sep = sep, row.names = row.names, quote = quote, ...)
   system(  paste('aws s3 cp', local, s3.path, "--sse", sep = " "))
-  if(cache == FALSE){unlink(local)}
 }
