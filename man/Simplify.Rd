@@ -5,7 +5,7 @@
 \title{Collapse a complex array into unique components}
 \usage{
 Simplify(x, delim = "; ", unique = F, na.rm = T, ignore.case = T,
-  sort = T, null.return = NA)
+  sort = T, missing.value = "NA", null.return = NA)
 }
 \arguments{
 \item{x}{Vector or list. This can contain all valid element types, however

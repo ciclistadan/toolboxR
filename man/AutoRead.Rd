@@ -2,29 +2,23 @@
 % Please edit documentation in R/file_io.R
 \name{AutoRead}
 \alias{AutoRead}
-\title{Attempts to automatically recognize file type and import
+\title{Deprecated, use auto_read(). 
+Attempts to automatically recognize file type and import
  as dataframe}
 \usage{
-AutoRead(file, sheet = 1, check.names = T, skip = 0, colnames = T)
+AutoRead(file, ...)
 }
 \arguments{
 \item{file}{path to an xlsx binary file}
 
-\item{sheet}{number or name of workbook sheet to import.
-Defaults to first sheet.}
-
-\item{check.names}{logical. If TRUE then the names of the variables in the 
-data frame are checked to ensure that they are syntactically 
-valid variable names. If necessary they are adjusted 
-(by make.names) so that they are, and also to ensure 
-that there are no duplicates.}
-
-\item{skip}{number of lines to skip before import.}
+\item{...}{Pass any file-type appropriate arguments on to their handler 
+functions. e.g., readxl::read_excel(), read.delim(), read.csv()}
 }
 \value{
 dataframe
 }
 \description{
+Deprecated, use auto_read(). 
 Attempts to automatically recognize file type and import
  as dataframe
 }
