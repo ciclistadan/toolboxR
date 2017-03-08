@@ -2,9 +2,11 @@
 
 export(AutoRead)
 export(CollapseDF)
+export(GetS3Table)
 export(Simplify)
 export(WriteTableToS3)
 export(append_df)
+export(auto_read)
 export(check.value)
 export(collapse_dt)
 export(entrez_id)
