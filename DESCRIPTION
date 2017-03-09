@@ -13,5 +13,6 @@ Suggests:
     XML (>= 3.98),
     readxl (>= 0.1.1),
     data.table (>= 1.10.0),
-    dplyr (>= 0.5.0)
+    dplyr (>= 0.5.0),
+    lubridate (>= 1.6.0)
 RoxygenNote: 6.0.1
