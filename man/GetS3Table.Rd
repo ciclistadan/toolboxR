@@ -4,7 +4,7 @@
 \alias{GetS3Table}
 \title{Read tables from S3 bucket directly into df object}
 \usage{
-GetS3Table(s3.path, cache = F, ...)
+GetS3Table(s3.path, cache = F, aws.args = "", ...)
 }
 \arguments{
 \item{s3.path}{Full character string uri of the table.}

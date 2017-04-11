@@ -4,7 +4,8 @@
 \alias{PutS3Table}
 \title{Write tab-delim tables to S3 bucket}
 \usage{
-PutS3Table(object, s3.path, sep = "\\t", row.names = F, quote = F, ...)
+PutS3Table(object, s3.path, sep = "\\t", row.names = F, quote = F,
+  aws.args = "", ...)
 }
 \arguments{
 \item{object}{a table object (df, data.table, tibble}
