@@ -53,10 +53,10 @@ WriteTableToS3 <- function(bucket, path = "", arguments = ""){
 #'              left, default for cache=F removes file after transfer.
 #' @return data.frame
 #' @export
-GetS3Table <- function(s3.path, cache = F, ...){
+GetS3Table <- function(s3.path, cache = F, aws.args = "", ...){
   name  <- basename(s3.path)
   local.filename <- file.path("/tmp", name)
-  system(  paste('aws s3 cp', s3.path, local.filename, sep = " "))
+  system(  paste('aws s3 cp', s3.path, local.filename, aws.args, sep = " "))
   df <- toolboxR::auto_read(local.filename, ...)
   if(cache == FALSE){unlink(local.filename)}
   df
@@ -68,9 +68,9 @@ GetS3Table <- function(s3.path, cache = F, ...){
 #' @param s3.path Full character string uri of the table. 
 #' @return aws response code
 #' @export
-PutS3Table <- function(object, s3.path, sep = "\t", row.names = F, quote = F, ...){
+PutS3Table <- function(object, s3.path, sep = "\t", row.names = F, quote = F, aws.args = "", ...){
   name  <- basename(s3.path)
   local <- file.path("/tmp", name)
   write.table(object, local, sep = sep, row.names = row.names, quote = quote, ...)
-  system(  paste('aws s3 cp', local, s3.path, "--sse", sep = " "))
+  system(  paste('aws s3 cp', local, s3.path, "--sse", aws.args, sep = " "))
 }
