@@ -27,8 +27,8 @@ auto_read <- function(file, reader = "", stringsAsFactors = F, remove.empty.colu
   }else{ stop("tool not set") }
   
   # remove empty rows and colums
-  if(remove.empty.columns) df <- df[, !apply(df, MARGIN = 2, function(x){all( is.na(x) | x=="NA" | x == "" )})]
-  if(remove.empty.rows)    df <- df[!apply(df, MARGIN = 2, function(x){all( is.na(x) | x=="NA" | x == "" )}), ]
+  if(remove.empty.columns) df <- df[, !apply(df, 2, function(x){all( is.na(x) | x=="NA" | x == "" )})]
+  if(remove.empty.rows)    df <- df[!apply(df, 1, function(x){all( is.na(x) | x=="NA" | x == "" )}), ]
   df
 }
 
