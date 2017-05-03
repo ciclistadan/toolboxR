@@ -2,9 +2,7 @@
 % Please edit documentation in R/curate_df.R
 \name{normalize_strings}
 \alias{normalize_strings}
-\title{Automated normalization of string formats
- 
-I commonly use this to clean abnormally formatted df variable names.}
+\title{Automated normalization of string formats}
 \usage{
 normalize_strings(x, case = "upper", length = 20)
 }
@@ -21,7 +19,5 @@ of this length to retain intact words.}
 character vector
 }
 \description{
-Automated normalization of string formats
- 
 I commonly use this to clean abnormally formatted df variable names.
 }
