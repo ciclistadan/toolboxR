@@ -13,7 +13,7 @@
 #' @return dataframe or data.table, see reader parameter.
 #' @export
 auto_read <- function(file, stringsAsFactors = F,
-                      remove.empty.columns = T, remove.empty.rows = T,
+                      remove.empty.columns = F, remove.empty.rows = F,
                       make.names.valid = T, make.names.unique = T, ...){
 
   if(endsWith(file,"xlsx") | endsWith(file, "xls")){

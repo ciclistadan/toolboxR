@@ -2,7 +2,7 @@
 % Please edit documentation in R/file_io.R
 \name{AutoRead}
 \alias{AutoRead}
-\title{Deprecated, use auto_read(). 
+\title{Deprecated, use auto_read().
 Attempts to automatically recognize file type and import
  as dataframe}
 \usage{
@@ -11,14 +11,14 @@ AutoRead(file, ...)
 \arguments{
 \item{file}{path to an xlsx binary file}
 
-\item{...}{Pass any file-type appropriate arguments on to their handler 
+\item{...}{Pass any file-type appropriate arguments on to their handler
 functions. e.g., readxl::read_excel(), read.delim(), read.csv()}
 }
 \value{
 dataframe
 }
 \description{
-Deprecated, use auto_read(). 
+Deprecated, use auto_read().
 Attempts to automatically recognize file type and import
  as dataframe
 }
