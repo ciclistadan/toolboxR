@@ -79,10 +79,10 @@ remove_columns <- function(names, df){
 
 
 #' Automated normalization of string formats
-#'  
+#'
 #' I commonly use this to clean abnormally formatted df variable names.
-#' 
-#' 
+#'
+#'
 #' @param x Character vector.
 #' @param case Character value "upper" or "lower"
 #' @param length integer length which we will trim longer strings to. If non-alphanumeric
@@ -91,22 +91,22 @@ remove_columns <- function(names, df){
 #' @return character vector
 #' @export
 normalize_strings <- function(x, case = "upper", length = 20){
-  
+
   # substitute non-alphanumeric characters
   n <- gsub("[^[:alnum:]]+", ".", x)
   # chomp
   n <- gsub("^[ \\.]+|[ \\.]+$", "", n)
-  
+
   # Raw upper case helps differentiate from lower case
   if(case == "upper"){n <- toupper(n)
   }else if (case == "lower") {n <- tolower(n)}
-  
+
   n <- unlist(lapply(n, function(x){
     if( is.na(x) ){ x <- "COL"}
-    
+
     char.vector <- unlist(strsplit(x, split = ""))
     gaps <- grep("\\.", char.vector)
-    
+
     if(any(gaps > length-5 & gaps < length+5)){
       e <- min(gaps[gaps > length-5 & gaps < length+5])-1
     }else{
@@ -114,15 +114,26 @@ normalize_strings <- function(x, case = "upper", length = 20){
     }
     paste(char.vector[1:e], collapse = "")
   }))
-  
+
   # append serial if duplicated
   n <- make.unique(n)
-  
+
   if( any(duplicated(n)) ){
     warning(paste("Abbreviated column titles are non-unique:", paste(unique(n[duplicated(n)]), collapse = "; "), sep = " "))
   } else{n}
-  
+
   n
 }
 
-
+#
+# mutate_cond Create a simple function for data frames or data tables that can
+# be incorporated into pipelines. This function is like mutate but only acts on
+# the rows satisfying the condition:
+#
+#  usage: DF %>% mutate_cond(measure == 'exit', qty.exit = qty, cf = 0, delta.watts = 13)
+#
+mutate_cond <- function(.data, condition, ..., envir = parent.frame()) {
+  condition <- eval(substitute(condition), .data, envir)
+  .data[condition, ] <- .data[condition, ] %>% mutate(...)
+  .data
+}
