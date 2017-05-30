@@ -11,23 +11,23 @@ Simplify(x, delim = "; ", unique = F, na.rm = T, ignore.case = T,
 \item{x}{Vector or list. This can contain all valid element types, however
 the current version always returns a character type.}
 
-\item{delim}{A non-null character use to both split complex character 
-strings, and delimit output string elements containing more than 
+\item{delim}{A non-null character use to both split complex character
+strings, and delimit output string elements containing more than
 one element.}
 
-\item{unique}{Logical If TRUE, warns when more than one element is returned 
+\item{unique}{Logical If TRUE, warns when more than one element is returned
 from x after simplification.}
 
 \item{na.rm}{Logical if TRUE individual NA elements will be removed before
 simplification.}
 
-\item{ignore.case}{Logical should character string comparisons ignore case. 
+\item{ignore.case}{Logical should character string comparisons ignore case.
 A FALSE argument could return "FOO; Foo; foo" while a TRUE
 argument would only return "FOO".}
 
 \item{sort}{Logical should the final values be sorted before return.}
 
-\item{null.return}{Value to be returned if na.rm = TRUE and non-NA values 
+\item{null.return}{Value to be returned if na.rm = TRUE and non-NA values
 do not exist. By default NA will be returned for null return even
 if na.rm = TRUE, set this value to change this behavior.}
 }

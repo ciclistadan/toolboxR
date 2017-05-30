@@ -2,31 +2,33 @@
 % Please edit documentation in R/file_io.R
 \name{auto_read}
 \alias{auto_read}
-\title{Attempts to automatically recognize table type and import
- as tibble. Latest version incorporates *dots* to facilitate
- passing all possible options for each file reader type.}
+\title{Automatic file reader}
 \usage{
-auto_read(file, stringsAsFactors = F, remove.empty.columns = F,
-  remove.empty.rows = F, make.names.valid = T, make.names.unique = T, ...)
+auto_read(file, reader = "", stringsAsFactors = F,
+  remove.empty.columns = F, remove.empty.rows = F, make.names.valid = T,
+  make.names.unique = T, ...)
 }
 \arguments{
 \item{file}{path to an xlsx binary file}
 
-\item{remove.empty.columns, remove.empty.rows}{logical to remove columns or
+\item{reader}{string, Specify which package to read in your table, options include:
+read_excel, read.delim, read.csv, fread. NOTE: fread option
+will return a data.table, all others return data frame.}
+
+\item{remove.empty.columns, remove.empty.rows}{logical, to remove columns or
 rows composed entirely of NA, "NA", or blank values}
+
+\item{make.names.valid, make.names.unique}{logical, uses base make.names function
+to clean table names and make unique.}
 
 \item{...}{Pass any file-type appropriate arguments on to their handler
 functions. e.g., readxl::read_excel(), read.delim(), read.csv()}
-
-\item{reader}{Specify which package to read in your table, options include:
-read_excel, read.delim, read.csv, fread. NOTE: fread option
-will return a data.table, all others return data frame.}
 }
 \value{
 dataframe or data.table, see reader parameter.
 }
 \description{
 Attempts to automatically recognize table type and import
- as tibble. Latest version incorporates *dots* to facilitate
- passing all possible options for each file reader type.
+ as tibble or data.table. Latest version incorporates *dots*
+ to facilitate passing all possible options for each file reader type.
 }

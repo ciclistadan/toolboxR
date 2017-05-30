@@ -9,11 +9,11 @@ CollapseDF(df, column.names, unique = F)
 \arguments{
 \item{df}{DataFrame containing column.names}
 
-\item{column.names}{character vector of column names used for grouping rows. 
+\item{column.names}{character vector of column names used for grouping rows.
 Performs a similar function as "by=" in aggreagte()}
 
-\item{unique}{Logical Should fields containing more then one unique value be 
-allowed. It still returns a delimited list of multiple 
+\item{unique}{Logical Should fields containing more then one unique value be
+allowed. It still returns a delimited list of multiple
 values but throws warning from Simplify() if enforced.}
 }
 \value{
@@ -34,6 +34,6 @@ CollapseDF(df, "Patient")
  #   Patient   Age   Score
  # 1       1    31   10; 9
  # 2       2    32       8
- # 3       3    33      
+ # 3       3    33
  # 4       4    NA       4
 }

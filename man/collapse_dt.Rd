@@ -9,7 +9,7 @@ collapse_dt(df, column.names, unique = F)
 \arguments{
 \item{df}{DataFrame containing column.names}
 
-\item{column.names}{character vector of column names used for grouping rows. 
+\item{column.names}{character vector of column names used for grouping rows.
 Performs a similar function as "by=" in aggregate()}
 }
 \value{
@@ -17,7 +17,7 @@ collapsed data.table. This can be used as a data.frame or returned as dt
 }
 \description{
 This function performs similar to aggregate.data.frame, but with several
-conveniences. This version also improves on the previous CollapseDF by 
+conveniences. This version also improves on the previous CollapseDF by
 temporarily coercing into a data.table structure, making it handle Big Data
 much better. For simplicity it currently only allows grouping
 by columns that exist in df by explicit column name. Collapse columns are
@@ -32,6 +32,6 @@ collapse_dt(df, "Patient")
  #   Patient   Age   Score
  # 1       1    31   10; 9
  # 2       2    32       8
- # 3       3    33      
+ # 3       3    33
  # 4       4    NA       4
 }
