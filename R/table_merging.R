@@ -89,10 +89,10 @@ Simplify <- function(x, delim = "; ", unique = F, na.rm = T, ignore.case = T, so
 append_df <- function(main, new, id = "Patient",
                       mode = "safe", verbose = TRUE, delim = "; "){
 
-  if(!id %in% names(new)){
+  if(!id %in% names(new) ){
     message(paste0("dataframe does not contain specified id column: ", id))
     return(main)
-  }else if( any(names(new) %in% names(main)) ){
+  }else if( sum(names(new) %in% names(main)) == 1 ){
     message(paste0("dataframe does not contain additional columns to add"))
     return(main)
   }
