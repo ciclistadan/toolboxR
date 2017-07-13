@@ -4,7 +4,7 @@
 #'  as tibble or data.table. Latest version incorporates *dots*
 #'  to facilitate passing all possible options for each file reader type.
 #'
-#' @param file path to an xlsx binary file
+#' @param file path to an tabular data file
 #' @param reader string, Specify which package to read in your table, options include:
 #'              read_excel, read.delim, read.csv, fread. NOTE: fread option
 #'              will return a data.table, all others return data frame.
@@ -38,5 +38,35 @@ auto_read <- function(file, reader = "", stringsAsFactors = F,
   # remove empty rows and colums
   if(remove.empty.columns) df <- df[, !apply(df, 2, function(x){all( is.na(x) | x=="NA" | x == "" )})]
   if(remove.empty.rows)    df <- df[!apply(df, 1, function(x){all( is.na(x) | x=="NA" | x == "" )}), ]
+  df
+}
+
+#' Automatic file writer
+#'
+#' Simple tab-delim wrapper to ensure normalized function parameters
+#'
+#' @param x dataframe or datatable
+#' @param file path to write the output file
+#' @param ... Pass any file-type appropriate arguments on to their handler
+#'            functions.
+#' @return data frame used as input
+#' @export
+auto_write <- function(x, file, ...){
+
+  new.args     <- list(...)
+  default.args <- list(append    = F,
+                       quote     = T,
+                       sep       = "\t",
+                       na        = "NA",
+                       row.names = F,
+                       col.names = T )
+  args <- c(new.args, default.args[!(names(default.args) %in% names(new.args))])
+
+  write.table(x, file, append    = args$append    ,
+              quote     = args$quote     ,
+              sep       = args$sep       ,
+              na        = args$na        ,
+              row.names = args$row.names ,
+              col.names = args$col.names  )
   df
 }

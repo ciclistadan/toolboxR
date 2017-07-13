@@ -9,7 +9,7 @@ auto_read(file, reader = "", stringsAsFactors = F,
   make.names.unique = T, ...)
 }
 \arguments{
-\item{file}{path to an xlsx binary file}
+\item{file}{path to an tabular data file}
 
 \item{reader}{string, Specify which package to read in your table, options include:
 read_excel, read.delim, read.csv, fread. NOTE: fread option

@@ -78,7 +78,7 @@ format_column_names <- function(df,
   if( !is.null(replace_symbol) &&
       !is.na(replace_symbol) &&
       is.character(replace_symbol) ){
-print("replace")
+
     n <- gsub("([^a-zA-Z0-9]+)", replace_symbol , n)
     n <- gsub(paste0("^(\\",replace_symbol,"+)|(\\",replace_symbol,"+)$"), "", n)
   }
