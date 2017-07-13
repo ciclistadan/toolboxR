@@ -38,23 +38,51 @@ move_columns <- function(names, df, reverse = F){
   return(df)
 }
 
-#############################################
+
 #' Format columns names to lower, UPPER or Title.Case
 #'
 #' @param df which data frame to replace it in
-#' @param type default="title", also accepts "lower" or "upper"
+#' @param convert_case character default="lower", also accepts "Title", "UPPER"
+#'                     specify convert.case = "" to leave alone. NOTE: make_unique
+#'                     overrides this by always converting to "lower"
+#' @param replace_symbol character replace all non-alpha characters with
+#'              specified character (e.g. "_" or "."), removes leading/trailing
+#' @param make_unique boolean use make.names(unique = T) to make enforce
+#'                    valid unique names
 #' @return df with renamed columns
 #' @export
-format_column_names <- function(df, type = "title"){
+format_column_names <- function(df,
+                                type           = "lower",
+                                replace_symbol = ".",
+                                make_unique     = T){
 
-  n <- tolower(names(df))
+  type <- tolower(type)
+  n    <- names(df)
 
-  if(type == "title"){
+  # Convert case
+  if( type == "lower" ){
+    n <- tolower(n)
+  }else if (type == "upper") {
+    n <- toupper(n)
+  }else if (type == "title") {
     n <- gsub("^(.)", "\\U\\1", n , perl = T)
     n <- gsub("\\.(.)", ".\\U\\1", n , perl = T)
-  } else if (type == "upper") {
-    n <- toupper(n)
   }
+
+  # Make unique
+  if( make_unique ){
+    n <- make.names(names = n, unique = T, allow_ = T)
+  }
+
+  # Replace symbols
+  if( !is.null(replace_symbol) &&
+      !is.na(replace_symbol) &&
+      is.character(replace_symbol) ){
+print("replace")
+    n <- gsub("([^a-zA-Z0-9]+)", replace_symbol , n)
+    n <- gsub(paste0("^(\\",replace_symbol,"+)|(\\",replace_symbol,"+)$"), "", n)
+  }
+
   names(df) <- n
   df
 }

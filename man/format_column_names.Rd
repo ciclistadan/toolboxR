@@ -4,12 +4,21 @@
 \alias{format_column_names}
 \title{Format columns names to lower, UPPER or Title.Case}
 \usage{
-format_column_names(df, type = "title")
+format_column_names(df, type = "lower", replace_symbol = ".",
+  make_unique = T)
 }
 \arguments{
 \item{df}{which data frame to replace it in}
 
-\item{type}{default="title", also accepts "lower" or "upper"}
+\item{replace_symbol}{character replace all non-alpha characters with
+specified character (e.g. "_" or "."), removes leading/trailing}
+
+\item{make_unique}{boolean use make.names(unique = T) to make enforce
+valid unique names}
+
+\item{convert_case}{character default="lower", also accepts "Title", "UPPER"
+specify convert.case = "" to leave alone. NOTE: make_unique
+overrides this by always converting to "lower"}
 }
 \value{
 df with renamed columns
