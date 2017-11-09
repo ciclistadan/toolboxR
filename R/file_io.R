@@ -68,5 +68,4 @@ auto_write <- function(x, file, ...){
               na        = args$na        ,
               row.names = args$row.names ,
               col.names = args$col.names  )
-  df
 }
