@@ -2,7 +2,7 @@
 % Please edit documentation in R/annotate-terms.R
 \name{gpsdb_table}
 \alias{gpsdb_table}
-\title{Gene and Protein Synonyms Table from ExPASy}
+\title{Gene and Protein Synonyms Table from ExPASy.}
 \usage{
 gpsdb_table(term, acc = "", unique_only = TRUE)
 }
