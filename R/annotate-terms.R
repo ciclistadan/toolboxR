@@ -1,4 +1,4 @@
-#' Gene and Protein Synonyms Table from ExPASy
+#' Gene and Protein Synonyms Table from ExPASy.
 #'
 #' Fetch a synonym table from the GPSDB synonym tool this tool returns synonyms
 #' from EntrezGene, HGNC, OMIM and SwissProt(UniProt) databases if your search
