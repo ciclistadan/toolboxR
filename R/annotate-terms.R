@@ -66,12 +66,6 @@ launch_browser <- function(term){
   browseURL(query)
 }
 
-extract_db_keys <- function(df,db,colname){
-  e<-as.character(unique(df[df$db==db,colname]))
-  return(paste(e, sep="", collapse = "; "))
-}
-
-
 uniprotID_from_acc <- function(uniprot_acc){
   out <- tryCatch(
     {doc <- XML::xmlTreeParse(paste(
